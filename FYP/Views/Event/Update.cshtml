@@ -1,0 +1,155 @@
+﻿@model Event;
+
+@section MoreScripts {
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/lib/moment/moment.min.js"></script>
+    <link href="~/lib/dtpicker/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <script src="~/lib/dtpicker/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+            $('#JSStartDT')
+                .datetimepicker({
+                    format: 'DD/MM/YYYY HH:mm',
+                    sideBySide: true
+                });
+        });
+        $(document).ready(function () {
+            $('#JSEndDT')
+                .datetimepicker({
+                    format: 'DD/MM/YYYY HH:mm',
+                    sideBySide: true
+                });
+        });
+    </script>
+}
+
+<form asp-controller="Event"
+      asp-action="Update"
+      method="post">
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6 ">
+            <h2>Update Event Record</h2>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Title">Title :</label>
+        <div class="col-sm-5">
+            <input asp-for="Title" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Description">Description :</label>
+        <div class="col-sm-5">
+            <input asp-for="Description" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="StartDate">Start Date and Time: </label>
+        <div class="col-sm-5">
+            <div class="input-group date" id="JSStartDT" data-target-input="nearest">
+                <input type="text" asp-for="StartDate" class="form-control" />
+                <div class="input-group-append" data-target="#JSStartDT" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="EndDate">End Date and Time: </label>
+        <div class="col-sm-5">
+            <div class="input-group date" id="JSEndDT" data-target-input="nearest">
+                <input type="text" asp-for="EndDate" class="form-control" />
+                <div class="input-group-append" data-target="#JSEndDT" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Venue">Venue :</label>
+        <div class="col-sm-5">
+            <input asp-for="Venue" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <span asp-validation-for="Venue" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Type">User Role: </label>
+        <div class="col-sm-5">
+            <select asp-for="Type" class="form-control">
+                <option value="">--Select--</option>
+                <option value="Startup">Startup</option>
+                <option value="Alumni">Alumni</option>
+                <option value=" Startup and Alumni">Startup and Alumni</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Category">Category: </label>
+        <div class="col-sm-5">
+            <select asp-for="Category" class="form-control">
+                <option value="">--Select--</option>
+                <option value="Masterclass">Masterclass</option>
+                <option value="Networking">Networking</option>
+                <option value="Panels or Fireside Chat">Panels or Fireside Chat</option>
+                <option value="Consultation">Consultation</option>"
+            </select>
+        </div>
+
+        <div class="col-sm-4">
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+    </div>
+
+   
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="file">Attachment: </label>
+        <div class="col-sm-5">
+            <input type="file" name="file" id="FileName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-6">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    @ViewData["Message"]
+                </div>
+            </div>
+        </div>
+    }
+</form>

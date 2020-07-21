@@ -1,0 +1,26 @@
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+   <!-- Hamburger Menu -->
+   <button class="navbar-toggler" type="button"
+           data-toggle="collapse" data-target="#navbarSupportedContent"
+           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+   </button>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="nav nav-tabs mr-auto">
+           <li class="nav-item">
+               <a class="nav-link bg-dark border-light text-light" asp-controller="Portal" asp-action="Home">Home</a>
+           </li>
+       </ul>
+
+      <ul class="nav nav-tabs ml-auto">
+          <li>
+              <a class="nav-link bg-dark border-light text-light" asp-controller="Account" asp-action="Login">
+                  <i class="fa fa-sign-in-alt bg-dark "></i>
+                  Login
+              </a>
+          </li>
+      </ul>
+   </div>
+</nav>

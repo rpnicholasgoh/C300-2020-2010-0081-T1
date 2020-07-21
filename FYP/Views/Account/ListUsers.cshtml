@@ -1,0 +1,88 @@
+﻿@model List<User>
+
+@section MoreScripts{
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    @{
+
+    }
+    <script>
+        $(document).ready(function () {
+            $('#jsUserTable').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: true,
+                pageLength: 6,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]]
+            });
+        });
+    </script>
+
+}
+
+<h2>Users</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<table id="jsUserTable" class="table">
+    <thead>
+        <tr>
+            <th scope="col">UserName</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Email</th>
+            <th scope="col">UserRole</th>
+            <th scope="col">Batch</th>
+            <th scope="col">CompanyName</th>
+            <th scope="col">ContactNo</th>
+            <th scope="col">Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User user in Model)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@user.UserRole</td>
+
+                @{
+
+                    @if (user.UserRole.Equals("Alumni"))
+                    {
+                        <td>@String.Format("{0:yyyy}", user.Batch)</td>
+                    }
+                    else
+                    {
+                        <td>-</td>
+                    }
+                    <td>@user.CompanyName</td>
+                    <td>@user.ContactNo</td>
+                    <td>
+                        <a asp-controller="Account"
+                           asp-action="EditUser"
+                           asp-route-id="@user.Username">
+                            Edit
+                        </a> |
+                        <a asp-controller="Account"
+                           asp-action="DeleteUser"
+                           asp-route-id="@user.Username"
+                           onclick="return confirm('Are you sure you want to delete: @user.FullName?')">
+                            Delete
+                        </a>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+
+</table>

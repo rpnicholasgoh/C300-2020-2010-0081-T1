@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Tribe - Portal</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <link href="~/lib/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/brands.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/solid.min.css" rel="stylesheet" />
+    <script src="~/lib//dhtmlx/codebase/dhtmlxscheduler.js"></script>
+    <script src="~/lib/dhtmlx/codebase/ext/dhtmlxscheduler_recurring.js"></script>
+    <link href="~/lib/dhtmlx/codebase/dhtmlxscheduler_material.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <script src="~/lib/dhtmlx/codebase/ext/dhtmlxscheduler_readonly.js" type="text/javascript" charset="utf-8"></script>
+    <link href="~/lib/moment/moment.min.js" />
+    <style type="text/css">
+        .dhx_cal_event div.dhx_footer,
+        .dhx_cal_event.event_Alumni div.dhx_footer,
+        .dhx_cal_event.event_Startup div.dhx_footer {
+            background-color: transparent !important;
+        }
+
+        .dhx_cal_event .dhx_body {
+            -webkit-transition: opacity 0.1s;
+            transition: opacity 0.1s;
+            opacity: 0.7;
+        }
+
+        .dhx_cal_event .dhx_title {
+            line-height: 12px;
+        }
+
+        .dhx_cal_event_line:hover,
+        .dhx_cal_event:hover .dhx_body,
+        .dhx_cal_event.selected .dhx_body,
+        .dhx_cal_event.dhx_cal_select_menu .dhx_body {
+            opacity: 1;
+        }
+
+        .dhx_cal_event.event_Alumni div,
+        .dhx_cal_event_line.event_Alumni {
+            background-color: #C6D124 !important;
+            border-color: #732d16 !important;
+        }
+
+        .dhx_cal_event.dhx_cal_editor.event_Alumni {
+            background-color: #C6D124 !important;
+        }
+
+        .dhx_cal_event_clear.event_Alumni {
+            color: #C6D124 !important;
+        }
+
+        .dhx_cal_event.event_Startup div,
+        .dhx_cal_event_line.event_Startup {
+            background-color: #28BA00 !important;
+            border-color: #698490 !important;
+        }
+
+        .dhx_cal_event.dhx_cal_editor.event_Startup {
+            background-color: #28BA00 !important;
+        }
+
+        .dhx_cal_event_clear.event_Startup {
+            color: #28BA00 !important;
+        }
+
+        .filters_wrapper {
+            font: 500 14px Roboto;
+        }
+
+            .filters_wrapper span {
+                font-weight: bold;
+                padding-right: 5px;
+                color: rgba(0,0,0,0.7);
+            }
+
+            .filters_wrapper label {
+                padding-right: 3px;
+            }
+    </style>
+    @RenderSection("MoreScripts", false)
+</head>
+<body>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <Partial name="PortalAdmin" />
+        }
+        else if (User.IsInRole("Startup"))
+        {
+            <Partial name="PortalStartup" />
+        }
+        else
+        {
+            <Partial name="PortalAlumni" />
+        }
+    }
+    else
+    {
+        <Partial name="PortalGuest" />
+    }
+
+    <div class="container-fluid">
+        @RenderBody()
+
+    </div>
+    <footer class="fixed-bottom">
+        <!-- Insert Company Footer -->
+        <div class="bg-dark text-light text-center">
+            Copyright 2020 by Republic Polytechnic. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+    </script>
+</body>
+</html>
