@@ -30,6 +30,7 @@ namespace FYPDraft.Models
                 description = schedulerEvent.Description,
                 location = schedulerEvent.Venue,
                 type = schedulerEvent.Type,
+                category = schedulerEvent.Category,
                 start_date = schedulerEvent.StartDate.ToString("yyyy-MM-dd HH:mm"),
                 end_date = schedulerEvent.EndDate.ToString("yyyy-MM-dd HH:mm"),
                 event_pid = schedulerEvent.EventPID,
