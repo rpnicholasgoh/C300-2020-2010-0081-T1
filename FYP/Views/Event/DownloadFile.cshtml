@@ -1,7 +1,17 @@
-﻿
-@{
-    ViewData["Title"] = "DownloadFile";
+﻿@model Event;
+
+@section MoreScripts {
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/lib/moment/moment.min.js"></script>
+    <link href="~/lib/dtpicker/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <script src="~/lib/dtpicker/js/tempusdominus-bootstrap-4.min.js"></script>
+
 }
+<form asp-controller="Event"
+      asp-action="DownloadFile"
+      method="post">
 
-<h1>DownloadFile</h1>
+    <label class="control-label col-sm-5" id="FileName" href="~/file/@Model.FileName">@Model.FileName</label>
 
+
+</form>

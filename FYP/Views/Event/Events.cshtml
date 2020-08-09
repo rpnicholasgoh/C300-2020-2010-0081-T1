@@ -94,6 +94,11 @@
                            asp-action="DownloadFile"
                            asp-route-id="@row["Id"]">
                             Download
+                        </a> |
+                        <a asp-controller="Event"
+                           asp-action="Details"
+                           asp-route-id="@row["Id"]">
+                            Details
                         </a>
                     </td>
                 }
