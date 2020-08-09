@@ -76,10 +76,7 @@ namespace FYPDraft.Controllers
                     string title = "Invitation to Attend Program";
                     string message = String.Format(template, fname, newEvent.Title, newEvent.StartDate, newEvent.EndDate);
                     string result;
-                    if (EmailUtl.SendEmail(email, title, message, out result))
-                    {
-                        string msg = "Invitation sent";
-                    }
+                    EmailUtl.SendEmail(email, title, message, out result);
                 }
             }
             else if ((ev.Id == newEvent.Id) && (newEvent.Type == "Alumni"))
@@ -117,10 +114,7 @@ namespace FYPDraft.Controllers
                     string title = "Invitation to Attend Program";
                     string message = String.Format(template, fname, newEvent.Title, newEvent.StartDate, newEvent.EndDate);
                     string result;
-                    if (EmailUtl.SendEmail(email, title, message, out result))
-                    {
-                        string msg = "Invitation sent";
-                    }
+                    EmailUtl.SendEmail(email, title, message, out result);
                 }
             }
 
