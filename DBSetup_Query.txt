@@ -1,0 +1,111 @@
+DROP TABLE IF EXISTS User_has_Event;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Feedback;
+DROP TABLE IF EXISTS Event_has_Calendar;
+DROP TABLE IF EXISTS Event;
+DROP TABLE IF EXISTS Calendar;
+
+
+CREATE TABLE Users
+(
+  UserId INT IDENTITY PRIMARY KEY,
+  Username VARCHAR(45),
+  FullName VARCHAR(45) NOT NULL,
+  Email VARCHAR(50) NOT NULL,
+  Password VARBINARY(100) NOT NULL,
+  LastLogin DATETIME NULL,
+  UserRole VARCHAR(20) NOT NULL,
+  Batch DATETIME NULL,
+  CompanyName VARCHAR(50) NULL,
+  ContactPerson VARCHAR(50) NULL,
+  ContactNo VARCHAR(8) NOT NULL,
+);
+
+INSERT INTO Users(Username, FullName, Email, Password, UserRole, Batch, CompanyName, ContactNo) VALUES
+(1, 'raihan',  'Muhammad Raihan',  'omegaraihan@gmail.com',   HASHBYTES('SHA1', 'secret0'),  'Admin', NULL, 'Republic Poly', 81577765),
+(2, 'alumni1',  'Alumni One', 'alumnionetest@gmail.com', HASHBYTES('SHA1', 'password1'), 'Alumni', '2019-05-20 12:00', 'BMW', 88888888),
+(3, 'startup1', 'Startup One', 'startuponetest@gmail.com',  HASHBYTES('SHA1', 'password2'), 'Startup', NULL, 'A Bakery', 81928374);
+
+CREATE TABLE Feedback
+(
+  FeedbackGuid VARCHAR (200) PRIMARY KEY,
+  Recommend BINARY NOT NULL,
+  Satisfaction VARCHAR(45) NOT NULL,
+  Comment VARCHAR(200) NULL
+);
+
+
+CREATE TABLE Event
+(
+  Id INT IDENTITY PRIMARY KEY,
+  Title VARCHAR(200) NOT NULL,
+  Description VARCHAR(400) NOT NULL,
+  StartDate DATETIME NOT NULL,
+  EndDate DATETIME NOT NULL,
+  Venue VARCHAR(200) NOT NULL,
+  Type VARCHAR(45) NOT NULL,
+  FileGuid VARCHAR(100) NULL,
+  FileName VARCHAR(100) NULL,
+  EventPID INT NOT NULL,
+  RecType VARCHAR(45) NULL,
+  EventLength BIGINT NOT NULL
+);
+
+SET IDENTITY_INSERT Event ON;
+INSERT INTO Event(Id, Title, Description, Venue, Type, StartDate, EndDate, EventPID, EventLength) VALUES
+(1,  'Starting up your business',  'Introduction to advertising and marketing your business', 'Tribe Accelerator - 6, #03-308 Raffles Blvd, Marina Square, 039594', 'Startup',   '2020-06-08 16:00',  '2020-06-08 18:00', 0, 0),
+(2,  'Growing Your Business',  'Introduction to trends in the market',   'Tribe Accelerator - 6, #03-308 Raffles Blvd, Marina Square, 039594', 'Startup', '2020-06-15 16:00', '2020-06-15 18:00', 0, 0),
+(3,  'Hiring Employees',  'Strategies in hiring employees and making your business appealing',  'Tribe Accelerator - 6, #03-308 Raffles Blvd, Marina Square, 039594', 'Startup', '2020-06-22 16:00',  '2020-06-22 18:00', 0, 0),
+(4,  'Re-inventing the business',  'Giving Insights to starting anew',  'Tribe Accelerator - 6, #03-308 Raffles Blvd, Marina Square, 039594', 'Alumni', '2020-06-22 16:00',  '2020-06-22 18:00', 0, 0);
+SET IDENTITY_INSERT Event OFF;
+
+CREATE TABLE User_has_Event (
+  Username VARCHAR(45) NOT NULL,
+  Id INT NOT NULL,
+  FeedbackGuid VARCHAR(200) NOT NULL,
+  Attendance VARCHAR(45) NULL,
+  PRIMARY KEY (Username, Id),
+  INDEX fk_User_has_Event_Event1_idx (Id ASC),
+  INDEX fk_User_has_Event_Feedback1_idx (FeedbackGuid ASC),
+  INDEX fk_User_has_Event_User1_idx (Username ASC),
+  CONSTRAINT fk_User_has_Event_Event1
+    FOREIGN KEY (Id)
+    REFERENCES Event (Id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_User_has_Event_Feedback1
+    FOREIGN KEY (FeedbackGuid)
+    REFERENCES Feedback (FeedbackGuid)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_User_has_Event_User1
+    FOREIGN KEY (Username)
+    REFERENCES Users (Username)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE Calendar
+(
+  CalId INT IDENTITY PRIMARY KEY,
+  GUname VARCHAR(200) NOT NULL,
+  GCalId VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE Event_has_Calendar (
+  Id INT NOT NULL,
+  CalId INT NOT NULL,
+  PRIMARY KEY (Id, CalId),
+  INDEX fk_Event_has_Calendar_Calendar1_idx (CalId ASC),
+  INDEX fk_Event_has_Calendar_Event1_idx (Id ASC),
+  CONSTRAINT fk_Event_has_Calendar_Event1
+    FOREIGN KEY (Id)
+    REFERENCES Event (Id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_Event_has_Calendar_Calendar1
+    FOREIGN KEY (Id)
+    REFERENCES Calendar (CalId)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
