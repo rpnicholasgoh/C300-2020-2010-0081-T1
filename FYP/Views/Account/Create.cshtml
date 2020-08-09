@@ -96,8 +96,9 @@
 
     <div class="form-group row">
         <label class="control-label col-sm-2" asp-for="Password">Password: </label>
+        
         <div class="col-sm-4">
-            <input asp-for="Password" class="form-control" />
+            <input type="Password" asp-for="Password" class="form-control"/> 
         </div>
         <div class="col-sm-2">
             <span asp-validation-for="Password" class="text-danger"></span>
@@ -107,7 +108,7 @@
     <div class="form-group row">
         <label class="control-label col-sm-2" asp-for="Password2">Confirmed Password: </label>
         <div class="col-sm-4">
-            <input asp-for="Password2" class="form-control" />
+            <input type="Password"asp-for="Password2" class="form-control" />
         </div>
         <div class="col-sm-2">
             <span asp-validation-for="Password2" class="text-danger"></span>
