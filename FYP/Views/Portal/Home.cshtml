@@ -112,18 +112,19 @@
 
                                 ];
 
-                                var cat = [
+                                var cats = [
                                     { key: 'Consultation', label: 'Consultation' },
                                     { key: 'Masterclass', label: 'Masterclass' },
                                     { key: 'Networking', label: 'Networking' },
                                     { key: 'Panels or Fireside Chat', label: 'Panel or Fireside Chat' }
                                 ];
+
                                 scheduler.config.lightbox.sections = [
                                     { name: "Title", height: 70, map_to: "text", type: "textarea", focus: true },
                                     { name: "Description", height: 65, map_to: "description", type: "textarea" },
                                     { name: "Location", height: 80, map_to: "location", type: "textarea" },
                                     { name: "Type of User", height: 20, map_to: "type", type: "select", options: type },
-                                    { name: "Category", height: 20, map_to: "cat", type: "select", options: type },
+                                    { name: "Category", height: 20, map_to: "category", type: "select", options: cats },
                                     {
                                         name: "recurring", height: 115, type: "recurring", map_to: "rec_type",
                                         button: "recurring"
@@ -147,7 +148,7 @@
                                     { name: "Description", height: 65, map_to: "description", type: "template" },
                                     { name: "Location", height: 80, map_to: "location", type: "template" },
                                     { name: "Type of User", height: 20, type: "template", map_to: "type" },
-                                    { name: "Category", height: 20, type: "template", map_to: "cat" },
+                                    { name: "Category", height: 20, type: "template", map_to: "category" },
                                     { name: "time", type: "time", map_to: "auto", readonly: true }
                                 ];
                                 scheduler.attachEvent("onLightbox", function () {
