@@ -4,21 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data;
 using System.Security.Claims;
-using FYP2.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Net.Mail;
-using Xamarin.Essentials;
 using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
-using NPOI.SS.Formula.Functions;
+using FYPDraft.Models;
 
-namespace FYP2.Controllers
+namespace FYPDraft.Controllers
 {
     public class AccountController : Controller
     {
