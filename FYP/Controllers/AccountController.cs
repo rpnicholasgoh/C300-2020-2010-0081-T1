@@ -4,14 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data;
 using System.Security.Claims;
+using FYP2.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Net.Mail;
+using Xamarin.Essentials;
+using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
-using FYPDraft.Models;
+using NPOI.SS.Formula.Functions;
 
-namespace FYPDraft.Controllers
+namespace FYP2.Controllers
 {
     public class AccountController : Controller
     {
@@ -190,7 +197,7 @@ namespace FYPDraft.Controllers
                 string password = rp.UserPw.ToString();
                 string select = @"SELECT * FROM Users WHERE Email='{0}'";
                 DataTable dt = DBUtl.GetTable(select, email);
-                if (dt.Rows.Count == 1)
+                if (dt.Rows.Count == 2)
                 {
                     string uname = dt.Rows[0]["Username"].ToString();
                     string cfmEmail = dt.Rows[0]["Email"].ToString();
