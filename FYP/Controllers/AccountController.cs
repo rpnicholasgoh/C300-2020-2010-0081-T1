@@ -7,7 +7,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using FYPDraft.Models;
@@ -161,7 +160,8 @@ namespace FYPDraft.Controllers
             }
 
             //Create necessary database to store user info if required
-            /*To code for forgot password to send user email for the password reset link*/
+            // To code for forgot password to send user email for the password reset link //
+
 
             return View(); //TO remove or edit this line of code//
         }
@@ -191,7 +191,7 @@ namespace FYPDraft.Controllers
                 string password = rp.UserPw.ToString();
                 string select = @"SELECT * FROM Users WHERE Email='{0}'";
                 DataTable dt = DBUtl.GetTable(select, email);
-                if (dt.Rows.Count == 2)
+                if (dt.Rows.Count == 1)
                 {
                     string uname = dt.Rows[0]["Username"].ToString();
                     string cfmEmail = dt.Rows[0]["Email"].ToString();
