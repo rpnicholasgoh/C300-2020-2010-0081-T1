@@ -9,7 +9,7 @@ namespace FYPDraft.Controllers
 {
     public class ProgramController : Controller
     {
-        [Authorize(Roles = "Admin, Alumni, Startup")]
+        [Authorize(Roles = "Admin,Alumni,Startup")]
         public IActionResult Calendar()
         {
             return View();
